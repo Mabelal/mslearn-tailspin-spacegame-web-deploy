@@ -21,5 +21,4 @@ jobs:
        inputs:
         azureSubscription: 'Resource Manager - Tailspin - Space Game'
         appName: '$({{ parameters.appName }})'
-        package: '$(Pipeline.Workspace)/drop/{{ parameters.buildConfiguration }}/*.zip'
-  
+        package: '$(Pipeline.Workspace)/drop/${{ parameters.buildConfiguration }}/*.zip' 
