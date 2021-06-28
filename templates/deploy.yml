@@ -7,7 +7,7 @@ jobs:
 - deployment: Deploy
   pool:
    vmImage: 'ubuntu-20.04'
-  environment: '$({{ parameters.env }})'
+  environment: {{ parameters.env }}
   variables:
   - group: 'Release'
   strategy:
