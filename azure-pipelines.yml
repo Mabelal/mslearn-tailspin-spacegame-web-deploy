@@ -83,28 +83,31 @@ stages:
     succeeded(),
     eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
    )
-- template: templates/deploy.yml
-  parameters:
-   buildConfiguration: '$(buildConfiguration)'
-   appName: '$(WebAppNameDev)'
-   env: 'dev'
+  jobs:
+   - template: templates/deploy.yml
+     parameters:
+      buildConfiguration: '$(buildConfiguration)'
+      appName: '$(WebAppNameDev)'
+      env: 'dev'
 
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
   dependsOn: Dev
   #condition: eq(variables['Build.Reason'], 'Schedule')
-- template: templates/deploy.yml
-  parameters:
-   buildConfiguration: '$(buildConfiguration)'
-   appName: '$(WebAppNameTest)'
-   env: 'test'
+  jobs:
+   - template: templates/deploy.yml
+     parameters:
+      buildConfiguration: '$(buildConfiguration)'
+      appName: '$(WebAppNameTest)'
+      env: 'test'
 
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
   dependsOn: Test
-- template: templates/deploy.yml
-  parameters:
-   buildConfiguration: '$(buildConfiguration)'
-   appName: '$(WebAppNameStaging)'
-   env: 'staging'
+  jobs:
+   - template: templates/deploy.yml
+     parameters:
+      buildConfiguration: '$(buildConfiguration)'
+      appName: '$(WebAppNameStaging)'
+      env: 'staging'
 
